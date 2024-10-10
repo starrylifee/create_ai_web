@@ -12,7 +12,7 @@ if api_key:
     genai.configure(api_key=api_key)
 
     # Streamlit 페이지 제목 설정
-    st.title("인공지능 이미지 분석기")
+    st.title("과학 실험 이미지 분석기")
 
     # 생성 설정
     generation_config = {
@@ -30,7 +30,7 @@ if api_key:
     )
 
     # 이미지 업로드 기능 추가
-    uploaded_file = st.file_uploader("이미지를 업로드하세요", type=["jpg", "jpeg", "png"])
+    uploaded_file = st.file_uploader("과학실험 이미지를 업로드하세요", type=["jpg", "jpeg", "png"])
 
     def upload_to_gemini(file_data, mime_type=None):
         """Uploads the given file to Gemini and returns the file object."""
@@ -55,15 +55,15 @@ if api_key:
                     "role": "user",
                     "parts": [
                         uploaded_gemini_file,
-                        "이 이미지는 악보 이미지 입니다. 이 노래가 어울리는 상황을 제시하고 시나리오를 생성해주세요..",
+                        "이 이미지는 과학 실험 장면입니다. 이 실험에서 위험한 행동을 분석하고 설명해주세요.",
                     ],
                 },
             ]
         )
 
         # 결과 출력
-        response = chat_session.send_message("이미지 분석 결과를 알려주세요.")
-        st.subheader("이미지 분석 결과")
+        response = chat_session.send_message("과학 실험에서 위험한 행동 분석 결과를 알려주세요.")
+        st.subheader("위험한 행동 분석 결과")
         st.write(response.text)
 else:
     st.warning("API 키를 사이드바에 입력하세요.")
